@@ -1,0 +1,15 @@
+.form {
+  @apply flex w-full items-center justify-center h-dvh absolute left-0 top-0 -z-10;
+  >form {
+    @apply bg-white w-full max-w-40p shadow-md rounded-2xl px-8 pt-6 pb-8 mb-4;
+
+    input {
+      @apply shadow appearance-none border rounded w-full py-2 px-3
+      text-gray-700 leading-tight focus:outline-none focus:border-blue-500;
+    }
+    input[type="submit"] {
+      @apply  text-white
+      focus:outline-none cursor-pointer;
+    }
+  }
+}
