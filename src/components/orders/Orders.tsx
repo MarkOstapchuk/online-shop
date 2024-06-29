@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 
-import { SkeletonItem } from '@/components/orders/SkeletonItem'
+import { SkeletonItemOrder } from '@/components/orders/SkeletonItemOrder'
 
 enum Status {
   all = 'all',
@@ -80,9 +80,9 @@ export default Orders
 const SkeletomLayout = () => {
   return (
     <div className={'flex flex-col w-full gap-10'}>
-      <SkeletonItem />
-      <SkeletonItem />
-      <SkeletonItem />
+      <SkeletonItemOrder />
+      <SkeletonItemOrder />
+      <SkeletonItemOrder />
     </div>
   )
 }

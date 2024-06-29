@@ -1,9 +1,10 @@
 interface IProduct {
   id: number
   name: string
-  title: string
   images: string[]
+  description: string
   price: IPrice
+  netWeightInKg: number
   categories: ICategory[]
 }
 
@@ -21,7 +22,6 @@ interface IProductDetails extends IProduct {
   lengthInMeters: number
   widthInMeters: number
   heightInMeters: number
-  netWeightInKg: number
   grossWeightInKg: number
 }
 

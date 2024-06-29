@@ -1,36 +1,41 @@
-import axios from 'axios'
+import { axiosClassic, axiosWithAuth } from '@/config/interceptors'
 
-import { axiosWithAuth } from '@/config/interceptors'
+import { AuthService } from '@/services/auth.service'
+import { getAccessToken, getRefreshToken } from '@/services/authToken.service'
 
 class CartService {
-  private BASE_URL = '/cart'
-  //replace axios with axios interceptors auth
+  private readonly axios: typeof axiosClassic | typeof axiosWithAuth
+  private BASE_URL = '/user-service/cart'
   //send cookie cartId
+  constructor() {
+    const token = getRefreshToken()
+
+    this.axios = token ? axiosWithAuth : axiosClassic
+    console.log(
+      `Using Axios instance: ${token ? 'axiosWithAuth' : 'axiosClassic'}`
+    )
+  }
   async getCart() {
-    return axiosWithAuth.get<ICart>(this.BASE_URL)
+    const data = await this.axios.get<ICart>(this.BASE_URL)
+    return data.data
   }
   async addItemToCart(item: ICartRequest) {
-    return axiosWithAuth.post<ICartItem>(`${this.BASE_URL}/add`, {
-      item
+    return this.axios.post<ICartItem>(`${this.BASE_URL}/add`, {
+      ...item
     })
   }
   async updateQuantity(id: number, quantity: IUpdateQuantityRequest) {
-    return axiosWithAuth.patch<ICartItem>(
-      `${this.BASE_URL}/update`,
+    const data = await this.axios.patch<ICart>(
+      `${this.BASE_URL}/update/${id}`,
       {
         ...quantity
-      },
-      {
-        params: {
-          id
-        }
       }
     )
+    return data.data
   }
   async deleteCartItem(id: number) {
-    return axiosWithAuth.delete<ICartItem>(`${this.BASE_URL}/delete`, {
-      params: { id }
-    })
+    const data = await this.axios.delete<ICart>(`${this.BASE_URL}/delete/${id}`)
+    return data.data
   }
 }
 

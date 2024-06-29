@@ -1,7 +1,5 @@
 import Cookies from 'js-cookie'
 
-import { client_path, client_url, domain } from '@/config/server'
-
 export enum EnumTokens {
   ACCESS_TOKEN = 'access_token',
   REFRESH_TOKEN = 'refresh_token'
@@ -16,10 +14,9 @@ export const getRefreshToken = () => {
   return refreshToken || null
 }
 
-export const saveTokenStorage = (token: string, type: EnumTokens) => {
+export const saveTokenStorage = (type: EnumTokens, token: string) => {
   Cookies.set(type, token, {
-    domain: domain,
-    sameSite: 'strict',
+    sameSite: 'none',
     expires: 1
   })
 }

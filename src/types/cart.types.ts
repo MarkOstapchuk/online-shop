@@ -3,6 +3,7 @@ interface ICart {
   totalPrices: Map<string, number>
 }
 interface ICartItem {
+  id: number
   product: IProductDetails
   quantity: number
 }

@@ -1,10 +1,12 @@
 'use client'
 
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { FormError } from '@/components/errors/FormError'
+
+import routes from '@/config/routes'
 
 import styles from './styles.module.scss'
 import { AuthService } from '@/services/auth.service'
@@ -18,18 +20,18 @@ const Login = () => {
   } = useForm<ILogin>({
     mode: 'onChange'
   })
-
+  //const queryClient = useQueryClient()
   const { mutate, isError } = useMutation({
     mutationKey: ['auth'],
     mutationFn: (data: ILogin) => AuthService.main(data),
-    onSuccess() {
-      //toast.success('Successfully register!')
+    async onSuccess() {
       reset()
-      // push(DASHBOARD_PAGES.HOME)
+      // await queryClient.invalidateQueries({ queryKey: ['cart'] })
+      push(routes.HOME)
     }
   })
 
-  const { push } = useRouter()
+  const { push, refresh } = useRouter()
   const onSubmit: SubmitHandler<ILogin> = (data) => {
     mutate(data)
   }

@@ -152,27 +152,27 @@ function SetSortComponent({ setSort }: { setSort: (sort: string) => void }) {
       <button
         onClick={() => setSort('name,asc')}
         className={
-          'rounded-t-lg w-full hover:bg-gray-200 px-6 py-3 flex items-center'
+          'rounded-t-lg w-full hover:bg-bg-gray px-6 py-3 flex items-center'
         }
       >
         <span>По алфавиту А-Я</span>
       </button>
       <button
         onClick={() => setSort('name,desc')}
-        className={'hover:bg-gray-200 px-6 py-3 flex items-center w-full'}
+        className={'hover:bg-bg-gray px-6 py-3 flex items-center w-full'}
       >
         <span>C конца алфавита Я-А</span>
       </button>
       <button
         onClick={() => setSort('price.amount,asc')}
-        className={'hover:bg-gray-200 px-6 py-3 flex items-center w-full'}
+        className={'hover:bg-bg-gray px-6 py-3 flex items-center w-full'}
       >
         <span>По возрастанию цены</span>
       </button>
       <button
         onClick={() => setSort('price.amount,desc')}
         className={
-          'rounded-b-lg hover:bg-gray-200 px-6 py-3 flex items-center w-full'
+          'rounded-b-lg hover:bg-bg-gray px-6 py-3 flex items-center w-full'
         }
       >
         <span>По убыванию цены</span>
@@ -182,6 +182,6 @@ function SetSortComponent({ setSort }: { setSort: (sort: string) => void }) {
 }
 function SetFilterComponent() {
   return (
-    <div className={'fixed z-20 top-0 left-0 bottom-0 bg-gray-200'}>filter</div>
+    <div className={'fixed z-20 top-0 left-0 bottom-0 bg-bg-gray'}>filter</div>
   )
 }

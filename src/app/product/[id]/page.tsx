@@ -1,12 +1,14 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import { ChevronRight, ChevronUp, Image as ImageIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 
 import Container from '@/components/header/Container'
 
+import cartService from '@/services/cart.service'
 import mediaService from '@/services/media.service'
 import productService from '@/services/product.service'
 
@@ -23,7 +25,19 @@ const Page = ({ params }: props) => {
     queryKey: ['product', productId],
     queryFn: () => productService.getProductDetailsById(productId)
   })
-  console.log(data)
+  const { mutate, isError } = useMutation({
+    mutationKey: ['addToCart'],
+    mutationFn: (data: ICartRequest) => cartService.addItemToCart(data),
+    onSuccess() {
+      toast.success('Product has been added to the cart!')
+    },
+    onError() {
+      toast.error('An error occurred!')
+    }
+  })
+  const addToCart = (id: number) => {
+    mutate({ productId: id, quantity: 1 })
+  }
   return (
     <Container>
       <div>
@@ -94,6 +108,7 @@ const Page = ({ params }: props) => {
                 </span>
               </div>
               <button
+                onClick={() => addToCart(data.id)}
                 className={
                   'mt-5 bg-deep rounded-3xl whitespace-nowrap py-3 block px-16 text-white'
                 }

@@ -1,4 +1,4 @@
-export const SkeletonItem = () => {
+export const SkeletonItemOrder = () => {
   return (
     <div className={`bg-bg p-4 rounded-lg flex w-full flex-col`}>
       <div className='w-full flex gap-5'>

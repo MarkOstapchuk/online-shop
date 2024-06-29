@@ -1,3 +1,4 @@
+import { gray } from 'next/dist/lib/picocolors'
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -14,7 +15,8 @@ const config: Config = {
         soft: '#D3C5E5',
         second: 'rgb(107 114 128)',
         third: 'rgb(209 213 219)',
-        bg: '#EFEFEF'
+        'bg-gray': '#f4f4f5',
+        bg: '#FEFEFE'
       },
       spacing: {
         '0.5': '0.12rem',
